@@ -8,4 +8,6 @@ spring:
 
 logging:
   level:
+    root: INFO
     com.bank.customer: DEBUG
+    org.springframework.data.mongodb.core.ReactiveMongoTemplate: INFO
