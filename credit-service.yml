@@ -6,6 +6,10 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/creditdb
 
+customer-service:
+  base-url: http://localhost:8081
+
 logging:
   level:
+    root: INFO
     com.bank.credit: DEBUG
