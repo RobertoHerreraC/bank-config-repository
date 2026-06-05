@@ -4,17 +4,18 @@ server:
 spring:
   cloud:
     gateway:
-      routes:
-        - id: customer-service-root
-          uri: lb://CUSTOMER-SERVICE
-          predicates:
-            - Path=/api/v1/customers
+      server:
+        webflux:
+          routes:
+            - id: customer-service-root
+              uri: lb://CUSTOMER-SERVICE
+              predicates:
+                - Path=/api/v1/customers
 
-        - id: customer-service
-          uri: lb://CUSTOMER-SERVICE
-          predicates:
-            - Path=/api/v1/customers/**
-
+            - id: customer-service
+              uri: lb://CUSTOMER-SERVICE
+              predicates:
+                - Path=/api/v1/customers/**
       # routes:
       #   - id: customer-service
       #     uri: lb://CUSTOMER-SERVICE
