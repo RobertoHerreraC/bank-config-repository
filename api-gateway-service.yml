@@ -4,39 +4,47 @@ server:
 spring:
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
       routes:
+        - id: customer-service-root
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            - Path=/api/v1/customers
+
         - id: customer-service
           uri: lb://CUSTOMER-SERVICE
           predicates:
-            - Path=/api/v1/customers,/api/v1/customers/**
+            - Path=/api/v1/customers/**
 
-        - id: account-service
-          uri: lb://ACCOUNT-SERVICE
-          predicates:
-            - Path=/api/v1/accounts/**
+      # routes:
+      #   - id: customer-service
+      #     uri: lb://CUSTOMER-SERVICE
+      #     predicates:
+      #       - Path=/api/v1/customers,/api/v1/customers/**
 
-        - id: credit-service
-          uri: lb://CREDIT-SERVICE
-          predicates:
-            - Path=/api/v1/credits/**
+      #   - id: account-service
+      #     uri: lb://ACCOUNT-SERVICE
+      #     predicates:
+      #       - Path=/api/v1/accounts/**
 
-        - id: credit-card-service
-          uri: lb://CREDIT-CARD-SERVICE
-          predicates:
-            - Path=/api/v1/credit-cards/**
+      #   - id: credit-service
+      #     uri: lb://CREDIT-SERVICE
+      #     predicates:
+      #       - Path=/api/v1/credits/**
 
-        - id: movement-service
-          uri: lb://MOVEMENT-SERVICE
-          predicates:
-            - Path=/api/v1/movements/**
+      #   - id: credit-card-service
+      #     uri: lb://CREDIT-CARD-SERVICE
+      #     predicates:
+      #       - Path=/api/v1/credit-cards/**
 
-        - id: report-service
-          uri: lb://REPORT-SERVICE
-          predicates:
-            - Path=/api/v1/reports/**
+      #   - id: movement-service
+      #     uri: lb://MOVEMENT-SERVICE
+      #     predicates:
+      #       - Path=/api/v1/movements/**
+
+      #   - id: report-service
+      #     uri: lb://REPORT-SERVICE
+      #     predicates:
+      #       - Path=/api/v1/reports/**
 
 eureka:
   instance:
@@ -46,7 +54,10 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 management:
+  endpoint:
+    gateway:
+      enabled: true
   endpoints:
     web:
       exposure:
-        include: health, info, gateway
+        include: health,info,gateway
