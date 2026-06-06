@@ -55,15 +55,10 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 management:
-  endpoints:
-    access:
-      default: unrestricted
-    web:
-      exposure:
-        include: "*"
-
   endpoint:
     gateway:
-      access: unrestricted
-    health:
-      access: unrestricted
+      access: read-only
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
