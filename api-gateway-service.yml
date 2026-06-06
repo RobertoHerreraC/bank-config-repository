@@ -1,7 +1,7 @@
 server:
   port: 8080
 
-# spring:
+spring:
 #   cloud:
 #     gateway:
 #       server:
@@ -62,3 +62,32 @@ server:
 #     web:
 #       exposure:
 #         include: health,info,gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: customer-service-root
+              uri: lb://CUSTOMER-SERVICE
+              predicates:
+                - Path=/api/v1/customers
+
+            - id: customer-service
+              uri: lb://CUSTOMER-SERVICE
+              predicates:
+                - Path=/api/v1/customers/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoint:
+    gateway:
+      access: read-only
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
