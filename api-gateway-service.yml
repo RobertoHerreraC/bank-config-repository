@@ -1,21 +1,21 @@
 server:
   port: 8080
 
-spring:
-  cloud:
-    gateway:
-      server:
-        webflux:
-          routes:
-            - id: customer-service-root
-              uri: lb://CUSTOMER-SERVICE
-              predicates:
-                - Path=/api/v1/customers
+# spring:
+#   cloud:
+#     gateway:
+#       server:
+#         webflux:
+#           routes:
+#             - id: customer-service-root
+#               uri: lb://CUSTOMER-SERVICE
+#               predicates:
+#                 - Path=/api/v1/customers
 
-            - id: customer-service
-              uri: lb://CUSTOMER-SERVICE
-              predicates:
-                - Path=/api/v1/customers/**
+#             - id: customer-service
+#               uri: lb://CUSTOMER-SERVICE
+#               predicates:
+#                 - Path=/api/v1/customers/**
       # routes:
       #   - id: customer-service
       #     uri: lb://CUSTOMER-SERVICE
@@ -47,18 +47,18 @@ spring:
       #     predicates:
       #       - Path=/api/v1/reports/**
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+# eureka:
+#   instance:
+#     prefer-ip-address: true
+#   client:
+#     service-url:
+#       defaultZone: http://localhost:8761/eureka
 
-management:
-  endpoint:
-    gateway:
-      access: read-only
-  endpoints:
-    web:
-      exposure:
-        include: health,info,gateway
+# management:
+#   endpoint:
+#     gateway:
+#       access: read-only
+#   endpoints:
+#     web:
+#       exposure:
+#         include: health,info,gateway
