@@ -56,10 +56,14 @@ eureka:
 
 management:
   endpoint:
-    gateway:
-      access: unrestricted
-
-  endpoints:
+    access:
+      default: unrestricted
     web:
       exposure:
-        include: health,info,gateway
+        include: "*"
+
+  endpoint:
+    gateway:
+      access: unrestricted
+    health:
+      access: unrestricted
